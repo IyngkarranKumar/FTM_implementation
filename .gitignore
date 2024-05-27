@@ -6,5 +6,6 @@ wandb/
 ftm/
 .ipynb_checkpoints/
 
-
+#other 
+__pycache__
 
