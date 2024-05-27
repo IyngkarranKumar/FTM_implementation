@@ -21,8 +21,7 @@ def compute_inner_weights(compute_to_labour_ratio,L,C_eff,n_labour_tasks,psi):
 
     return inner_weights
 
-
-def compute_labour_compute_arrays(L,C_eff,n_labour_tasks,automation_index,optimal_allocation=False):
+def construct_labour_compute_arrays(L,C_eff,n_labour_tasks,automation_index,optimal_allocation=False):
 
 
     if not optimal_allocation:
@@ -59,8 +58,6 @@ def compute_task_inputs(labour_array,effective_compute_array,eta):
     task_inputs = labour_array + (eta_*effective_compute_array)
     
     return task_inputs
-
-
 
 def compute_cognitive_inputs(inner_weights,task_inputs,psi):
 
