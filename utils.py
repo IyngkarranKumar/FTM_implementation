@@ -74,6 +74,25 @@ def compute_production(alpha,K,Cog,rho,TFP=1):
 
     return TFP * (alpha*K**rho + (1-alpha)*Cog**rho)**(1/rho)
 
+def construct_automation_thresholds(threshold_100,training_FLOP_GAP):
+    ##NOTE: the actual FTM sets 0,5,10,20 and 50 by hand then interpolates in log space between these
 
+    threshold_20=threshold_100-training_FLOP_GAP
+    threshold_0=threshold_20-(0.5*training_FLOP_GAP)
+    requirements_0_20=np.logspace(threshold_0,threshold_20,21)
+    requirements_20_100=np.logspace(threshold_20,threshold_100,80)
+    training_requirements=np.concatenate((requirements_0_20[:-1],requirements_20_100),axis=0)
+
+    return training_requirements
+
+def construct_baseline_runtime_efficiencies(runtime_reqs_100,runtime_FLOP_GAP):
+
+    runtime_reqs_20=runtime_reqs_100-runtime_FLOP_GAP
+    runtime_reqs_0=runtime_reqs_20-(0.5*runtime_FLOP_GAP)
+    runtime_reqs_0_20 = np.logspace(runtime_reqs_0,runtime_reqs_20,21)
+    runtime_reqs_20_100 = np.logspace(runtime_reqs_20,runtime_reqs_100,80)
+    runtime_reqs = np.concatenate((runtime_reqs_0_20[:-1],runtime_reqs_20_100),axis=0)
+
+    return runtime_reqs
     
 
