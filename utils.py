@@ -4,13 +4,13 @@ import numpy as np
 def compute_outer_weights(capital_to_cognitive_ratio,K,Cog,rho):
 
     omega = capital_to_cognitive_ratio*((Cog/K)**rho)
-    alpha = omega/1+omega
+    alpha = omega/(1+omega)
 
     return alpha
 
-def compute_inner_weights(compute_to_labour_ratio,n_labour_tasks,C_eff,rho):
+def compute_inner_weights(compute_to_labour_ratio,L,C_eff,n_labour_tasks,psi):
 
-    omega_ = compute_to_labour_ratio * ((L/(n_labour_tasks*C_eff))**rho)
+    omega_ = compute_to_labour_ratio * ((L/(n_labour_tasks*C_eff))**psi)
     beta_0 = omega_ / (1+omega_)
     beta_i = (1-beta_0)/n_labour_tasks
 
@@ -22,7 +22,7 @@ def compute_inner_weights(compute_to_labour_ratio,n_labour_tasks,C_eff,rho):
     return inner_weights
 
 
-def labour_compute_arrays(L,C_eff,n_labour_tasks,automation_index,optimal_allocation=False):
+def compute_labour_compute_arrays(L,C_eff,n_labour_tasks,automation_index,optimal_allocation=False):
 
 
     if not optimal_allocation:
@@ -95,4 +95,11 @@ def construct_baseline_runtime_efficiencies(runtime_reqs_100,runtime_FLOP_GAP):
 
     return runtime_reqs
     
+def set_automation_index(automation_training_threshold,C_T,n_labour_tasks):
 
+    automation_bools=automation_training_threshold<=C_T 
+    automated_task_indices=np.arange(1,n_labour_tasks+1)[automation_bools]
+    if len(automated_task_indices)==0: automation_index=0
+    else:automation_index=automated_task_indices[-1]
+
+    return automation_index
