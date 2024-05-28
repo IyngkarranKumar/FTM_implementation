@@ -1,2 +1,4 @@
 # FTM implementation
-In progress implementation of the Takeoff Model; see [here](https://epochai.org/blog/interactive-model-of-takeoff-speeds) for the original.
+In progress implementation of the Full Takeoff Model (FTM); see [here](https://www.openphilanthropy.org/research/what-a-compute-centric-framework-says-about-takeoff-speeds/) and [here](https://takeoffspeeds.com/) for more information about the original.
+
+The model estimates how much compute (in FLOPs) will be used in the largest frontier training run in a given year; it then maps training FLOP to AI systems that are able to automate X% of tasks in the economy. For example, the model assumes that AGI (able to automate 100% of the tasks in the economy) will require 10^36 FLOPs to train. Using this framework it is able to make predictions about things such as the number of years until AGI and takeoff speeds (defined as the time between AI systems that can automate 20% of economic tasks and AGI). 
